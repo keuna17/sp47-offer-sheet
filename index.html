@@ -582,28 +582,6 @@ function buildSheet(id, copyLabel) {
 
     <div class="totals-wrap">
       <table class="totals-table">
-        <tr>
-          <td>Subtotal</td>
-          <td id="${id}-total-sub">$0.00</td>
-        </tr>
-        <tr>
-          <td>
-            <label class="discount-label">
-              <input type="checkbox" class="chk-first" data-sheet="${id}">
-              First Order Discount (−5%)
-            </label>
-          </td>
-          <td id="${id}-disc-first">—</td>
-        </tr>
-        <tr>
-          <td>
-            <label class="discount-label">
-              <input type="checkbox" class="chk-volume" data-sheet="${id}">
-              Volume Discount (−5%)
-            </label>
-          </td>
-          <td id="${id}-disc-vol">—</td>
-        </tr>
         <tr class="grand">
           <td>Total (USD)</td>
           <td id="${id}-total-grand">$0.00</td>
@@ -744,16 +722,7 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
       sub += rowSub;
     });
 
-    const chkFirst  = sheet.querySelector('.chk-first');
-    const chkVolume = sheet.querySelector('.chk-volume');
-    const discFirst = chkFirst?.checked  ? sub * 0.05 : 0;
-    const discVol   = chkVolume?.checked ? sub * 0.05 : 0;
-    const grand     = sub - discFirst - discVol;
-
-    document.getElementById(`${sheetId}-total-sub`).textContent   = formatUSD(sub);
-    document.getElementById(`${sheetId}-disc-first`).textContent  = discFirst ? '−' + formatUSD(discFirst) : '—';
-    document.getElementById(`${sheetId}-disc-vol`).textContent    = discVol   ? '−' + formatUSD(discVol)   : '—';
-    document.getElementById(`${sheetId}-total-grand`).textContent = formatUSD(grand);
+    document.getElementById(`${sheetId}-total-grand`).textContent = formatUSD(sub);
   }
 
   // ── Sync a single row: buyer → seller ────────────────────
@@ -813,11 +782,6 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
       const s = src.querySelector('.' + cls);
       const d = dst.querySelector('.' + cls);
       if (s && d) d.value = s.value;
-    });
-    ['chk-first','chk-volume'].forEach(cls => {
-      const s = src.querySelector('.' + cls);
-      const d = dst.querySelector('.' + cls);
-      if (s && d) d.checked = s.checked;
     });
   }
 
