@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUNDAYPLANET47 — Offer Sheet</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      color: #111;
+      background: #f0f0f0;
+      padding: 24px;
+    }
+
+    /* ── Toolbar ─────────────────────────────────────── */
+    #toolbar {
+      max-width: 960px;
+      margin: 0 auto 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    #toolbar button {
+      padding: 8px 18px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+    #toolbar button:hover { background: #333; }
+    #toolbar button.btn-add {
+      background: #fff;
+      color: #111;
+      border: 1.5px solid #111;
+    }
+    #toolbar button.btn-add:hover { background: #f5f5f5; }
+    #toolbar .note { font-size: 11px; color: #666; }
+
+    /* ── Sheet card ──────────────────────────────────── */
+    .sheet {
+      max-width: 960px;
+      margin: 0 auto 32px;
+      background: #fff;
+      padding: 32px 36px 28px;
+      border: 1px solid #ddd;
+    }
+
+    /* ── Header ──────────────────────────────────────── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      gap: 16px;
+    }
+    .logo-wrap { line-height: 0; }
+    .logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      object-position: left center;
+    }
+    .logo-text-fallback {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      line-height: 1;
+    }
+    .brand-sub {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      color: #555;
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+    .address {
+      font-size: 9.5px;
+      color: #555;
+      line-height: 1.6;
+      margin-top: 3px;
+    }
+    .sheet-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .sheet-date { text-align: right; font-size: 10px; color: #666; margin-top: 4px; }
+
+    /* ── Section label ───────────────────────────────── */
+    .section-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: #111;
+      color: #fff;
+      padding: 3px 8px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    /* ── Buyer info ──────────────────────────────────── */
+    .buyer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+      margin-bottom: 16px;
+    }
+    .buyer-field { display: flex; flex-direction: column; gap: 2px; }
+    .buyer-field.full { grid-column: 1 / -1; }
+    .field-label { font-size: 9px; color: #888; font-weight: 600; letter-spacing: .06em; }
+    .field-input {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 3px 0;
+      font-size: 11px;
+      outline: none;
+      width: 100%;
+      background: transparent;
+      font-family: inherit;
+    }
+    .field-input:focus { border-bottom-color: #111; }
+
+    /* ── Order table ─────────────────────────────────── */
+    .order-section { margin-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      background: #111;
+      color: #fff;
+      padding: 5px 4px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-align: center;
+      white-space: nowrap;
+    }
+    thead th.left { text-align: left; }
+    tbody tr:nth-child(even) { background: #f9f9f9; }
+    tbody td {
+      padding: 2px 3px;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+    }
+    td.no {
+      text-align: center;
+      color: #888;
+      font-size: 10px;
+      width: 22px;
+      font-weight: 600;
+    }
+    td.divider, th.divider { width: 2px; padding: 0; background: #bbb; }
+
+    /* custom product input wrapper */
+    .prod-custom-wrap {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .prod-custom-wrap input { flex: 1; }
+    .back-btn {
+      cursor: pointer;
+      color: #aaa;
+      font-size: 11px;
+      padding: 0 2px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .back-btn:hover { color: #111; }
+
+    /* inputs inside table */
+    td input[type="text"],
+    td input[type="number"] {
+      border: none;
+      background: transparent;
+      font-size: 10px;
+      width: 100%;
+      outline: none;
+      padding: 3px 2px;
+      font-family: inherit;
+      color: #111;
+    }
+    td input[type="number"] {
+      text-align: right;
+      -moz-appearance: textfield;
+    }
+    td input[type="number"]::-webkit-inner-spin-button,
+    td input[type="number"]::-webkit-outer-spin-button { display: none; }
+    td input[type="text"]:focus,
+    td input[type="number"]:focus { background: #fffbe6; }
+    td.qty-cell { width: 38px; }
+    td.qty-cell input { text-align: center; font-weight: 600; }
+    td.price-cell { width: 64px; }
+    td.price-cell input { text-align: right; }
+    td.subtotal-cell {
+      width: 72px;
+      text-align: right;
+      font-size: 10px;
+      padding-right: 5px;
+      white-space: nowrap;
+      color: #111;
+    }
+
+    /* variant select inside table */
+    td select {
+      border: none;
+      background: transparent;
+      font-size: 10px;
+      width: 100%;
+      outline: none;
+      padding: 3px 2px;
+      font-family: inherit;
+      color: #111;
+      cursor: pointer;
+    }
+    td select:focus { background: #fffbe6; }
+    optgroup { font-weight: 700; }
+
+    /* ── Totals ──────────────────────────────────────── */
+    .totals-wrap { display: flex; justify-content: flex-end; margin-top: 6px; }
+    .totals-table { width: 300px; }
+    .totals-table td {
+      padding: 4px 6px;
+      border: none;
+      border-bottom: 1px solid #eee;
+      font-size: 11px;
+    }
+    .totals-table td:first-child { color: #555; }
+    .totals-table td:last-child { text-align: right; font-weight: 600; white-space: nowrap; }
+    .totals-table tr.grand td {
+      border-top: 2px solid #111;
+      border-bottom: none;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .discount-label { display: flex; align-items: center; gap: 6px; }
+    .discount-label input[type="checkbox"] { cursor: pointer; accent-color: #111; }
+
+    /* ── Shipping & Payment ──────────────────────────── */
+    .info-table { width: 100%; margin-bottom: 14px; }
+    .info-table td {
+      padding: 4px 6px;
+      border-bottom: 1px solid #eee;
+      font-size: 10.5px;
+      vertical-align: top;
+    }
+    .info-table td:first-child {
+      width: 180px;
+      color: #888;
+      font-weight: 600;
+      font-size: 9px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      padding-top: 5px;
+    }
+    .info-table .editable {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 2px 0;
+      font-size: 10.5px;
+      outline: none;
+      width: 100%;
+      background: transparent;
+      font-family: inherit;
+    }
+    .info-table .editable:focus { border-bottom-color: #111; }
+    .info-table .fixed { color: #333; font-size: 10px; line-height: 1.5; }
+    .bank-details { font-size: 9.5px; color: #555; line-height: 1.6; margin-top: 2px; }
+
+    /* ── Terms ───────────────────────────────────────── */
+    .terms-box {
+      border: 1px solid #e0e0e0;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      background: #fafafa;
+    }
+    .terms-box p { font-size: 9px; color: #666; line-height: 1.6; margin-bottom: 3px; }
+    .terms-box p strong { color: #333; }
+
+    /* ── Signatures ──────────────────────────────────── */
+    .sig-block { display: flex; justify-content: space-between; margin-top: 20px; gap: 32px; }
+    .sig-col { flex: 1; border-top: 1px solid #111; padding-top: 6px; }
+    .sig-col .sig-title { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #555; }
+    .sig-col .sig-line { margin-top: 30px; border-top: 1px solid #aaa; font-size: 9px; color: #aaa; padding-top: 3px; text-align: center; }
+
+    /* ── Copy badge ──────────────────────────────────── */
+    .copy-badge { text-align: center; font-size: 9px; font-weight: 700; letter-spacing: .16em; color: #999; margin-top: 14px; text-transform: uppercase; }
+
+    /* ── iPad / Tablet ───────────────────────────────── */
+    @media screen and (max-width: 1024px) {
+      body { padding: 14px; font-size: 12px; }
+
+      .sheet { padding: 24px 18px 20px; }
+
+      /* Bigger touch targets for all table inputs & selects */
+      td select,
+      td input[type="text"],
+      td input[type="number"] {
+        font-size: 13px;
+        padding: 6px 4px;
+        min-height: 36px;
+      }
+
+      /* Horizontally scrollable order table */
+      .order-section {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid #eee;
+        border-radius: 4px;
+      }
+      table { min-width: 820px; }
+
+      /* Larger header buttons */
+      #toolbar button {
+        padding: 11px 22px;
+        font-size: 14px;
+      }
+      #toolbar .note { font-size: 12px; }
+
+      /* Logo */
+      .logo-img { height: 40px; }
+
+      /* Buyer info: stack to single column on portrait */
+      .buyer-grid { gap: 10px 20px; }
+      .field-input { font-size: 14px; padding: 5px 0; }
+      .field-label { font-size: 10px; }
+
+      /* Shipping table */
+      .info-table td { font-size: 12px; padding: 6px 8px; }
+      .info-table td:first-child { font-size: 10px; width: 160px; }
+      .info-table .editable { font-size: 13px; }
+
+      /* Totals */
+      .totals-table { width: 100%; max-width: 360px; }
+      .totals-table td { font-size: 13px; padding: 6px 8px; }
+
+      /* Signature lines: taller for writing room */
+      .sig-col .sig-line { margin-top: 40px; }
+
+      /* Section labels */
+      .section-label { font-size: 10px; padding: 4px 10px; }
+
+      /* Terms */
+      .terms-box p { font-size: 10px; }
+
+      /* Seller copy: collapsible on screen */
+      #sheet-seller { display: none; }
+      #sheet-seller.visible { display: block; }
+    }
+
+    /* Portrait iPad (768px): single-column buyer info */
+    @media screen and (max-width: 820px) {
+      .buyer-grid { grid-template-columns: 1fr; }
+      .buyer-field.full { grid-column: 1; }
+      .header { flex-direction: column; gap: 8px; }
+      .sheet-title { text-align: left; font-size: 18px; }
+    }
+
+    /* Toggle seller copy button */
+    #seller-toggle {
+      padding: 11px 22px;
+      background: #fff;
+      color: #111;
+      border: 1.5px solid #111;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      display: none;
+    }
+    @media screen and (max-width: 1024px) {
+      #seller-toggle { display: inline-block; }
+    }
+
+    /* ── Print ───────────────────────────────────────── */
+    @media print {
+      body { background: #fff; padding: 0; font-size: 9.5px; }
+      #toolbar { display: none !important; }
+      #sheet-seller { display: block !important; }
+      .order-section { overflow-x: visible; border: none; }
+      .sheet {
+        max-width: 100%;
+        border: none;
+        padding: 14mm 14mm 12mm;
+        margin: 0;
+        page-break-after: always;
+      }
+      .sheet:last-of-type { page-break-after: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="toolbar">
+  <button onclick="window.print()">🖨 Print 2 copies</button>
+  <button class="btn-add" onclick="addRowPair()">＋ Add Row</button>
+  <button id="seller-toggle" onclick="toggleSeller()">Seller Copy 보기</button>
+  <span class="note">입력은 위쪽(Buyer Copy)에만 — Seller Copy에 자동 복사됩니다.</span>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════
+//  PRODUCT DATABASE
+// ════════════════════════════════════════════════════
+const PRODUCTS = [
+  { sku:"NP-CPH", name:"New Pot Copenhagen",           cat:"HOUSE",      price:9.94,  variants:["LEMON","P.BLOSSOM","BLUE SKY","GREENY"] },
+  { sku:"P-CPH",  name:"Pot Copenhagen",               cat:"HOUSE",      price:8.28,  variants:["FLORAL","MIDNIGHT","MYSTIC FOG"] },
+  { sku:"NP-BLN", name:"New Pot Berlin",               cat:"HOUSE",      price:10.93, variants:["LEMON","P.BLOSSOM","BLUE SKY","GREENY"] },
+  { sku:"P-BLN",  name:"Pot Berlin",                   cat:"HOUSE",      price:9.28,  variants:["FLORAL","MIDNIGHT","MYSTIC FOG"] },
+  { sku:"NP-CPD", name:"New Pot Cappadocia",           cat:"HOUSE",      price:11.26, variants:["LEMON","P.BLOSSOM","BLUE SKY","GREENY"] },
+  { sku:"P-CPD",  name:"Pot Cappadocia",               cat:"HOUSE",      price:9.61,  variants:["FLORAL","MIDNIGHT","MYSTIC FOG"] },
+  { sku:"NTR-11", name:"New Tray Eleven",              cat:"HOUSE",      price:2.65,  variants:["LEMON","P.BLOSSOM","BLUE SKY","GREENY"] },
+  { sku:"TR-11",  name:"Tray Eleven",                  cat:"HOUSE",      price:2.65,  variants:["FLORAL","MIDNIGHT","MYSTIC FOG"] },
+  { sku:"SC-PT",  name:"2026 Seoul Color Pot",         cat:"HOUSE",      price:11.93, variants:["MORNING YELLOW"] },
+  { sku:"HG-STR", name:"Hanging Strap",                cat:"HOUSE",      price:1.33,  variants:["IVORY","GRAY","DEEP BLUE","GREEN","NEON","YELLOW","TOMATO RED"] },
+  { sku:"HL-FS",  name:"Holding Light - Flower Simple",cat:"HOUSE",      price:22.20, variants:["YELLOW","SKY BLUE","GREEN","CLEAR","BLACK"] },
+  { sku:"HL-CL",  name:"Holding Light - Cloud Texture",cat:"HOUSE",      price:22.20, variants:["YELLOW","SKY BLUE","GREEN","CLEAR","BLACK"] },
+  { sku:"HL-WV",  name:"Holding Light - Wave Texture", cat:"HOUSE",      price:22.20, variants:["YELLOW","SKY BLUE","GREEN","CLEAR","BLACK"] },
+  { sku:"MPM",    name:"Multi Plant Mist",             cat:"PLANT CARE", price:5.96,  variants:[] },
+  { sku:"MPM-MN", name:"Multi Plant Mist Mini",        cat:"PLANT CARE", price:2.82,  variants:[] },
+  { sku:"MPM-RF", name:"Multi Plant Mist Refill 2L",   cat:"PLANT CARE", price:36.45, variants:[] },
+  { sku:"RS-PL",  name:"Rainy Shower+",                cat:"PLANT CARE", price:5.96,  variants:[] },
+  { sku:"RS-RF",  name:"Rainy Shower+ Refill",         cat:"PLANT CARE", price:26.51, variants:[] },
+  { sku:"GB",     name:"Green Booster",                cat:"PLANT CARE", price:7.95,  variants:[] },
+  { sku:"PC-SET", name:"Plant Care Set",               cat:"PLANT CARE", price:17.23, variants:[] },
+  { sku:"WC-4L",  name:"Watering Pot 4L",               cat:"TOOLS",      price:5.63,  variants:[] },
+  { sku:"PT-GL",  name:"Plant Towel Gloves",           cat:"TOOLS",      price:2.65,  variants:[] },
+  { sku:"PW-ST",  name:"Plant Watershot",              cat:"TOOLS",      price:2.65,  variants:[] },
+  { sku:"MAT-RP", name:"Repotting Mat",                cat:"TOOLS",      price:3.64,  variants:[] },
+  { sku:"SS-SH",  name:"Stainless Steel Shovel",       cat:"TOOLS",      price:5.63,  variants:[] },
+  { sku:"SS-SC",  name:"Stainless Steel Scissors",     cat:"TOOLS",      price:5.63,  variants:[] },
+  { sku:"WS-CR",  name:"Watershot Carrot",             cat:"TOOLS",      price:7.95,  variants:[] },
+  { sku:"BK-HP",  name:"Hello! Plants Book",           cat:"GOODS",      price:8.61,  variants:[] },
+  { sku:"CAL-26", name:"2026 Calendar (2 types)",      cat:"GOODS",      price:3.98,  variants:[] },
+  { sku:"RS-273", name:"273 Garden Room Spray",        cat:"LIFESTYLE",  price:11.26, variants:[] },
+  { sku:"PB-S",   name:"Plant Bag Small",              cat:"LIFESTYLE",  price:13.25, variants:["BLACK","BEIGE","NAVY","IVORY","KHAKI","YELLOW","PURPLE"] },
+  { sku:"PB-M",   name:"Plant Bag Medium",             cat:"LIFESTYLE",  price:16.57, variants:["BLACK","BEIGE","NAVY","IVORY","KHAKI","YELLOW","PURPLE"] },
+  { sku:"PB-L",   name:"Plant Bag Large",              cat:"LIFESTYLE",  price:19.88, variants:["BLACK","BEIGE","NAVY","IVORY","KHAKI","YELLOW","PURPLE"] },
+  { sku:"GC-GR",  name:"Green Ball Cap",               cat:"LIFESTYLE",  price:10.60, variants:["ONE COLOR"] },
+];
+
+let maxRow = 24;
+
+function formatUSD(n) {
+  return '$' + Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function findProductByName(name) {
+  return PRODUCTS.find(p => p.name.toLowerCase() === (name||'').trim().toLowerCase());
+}
+
+// Build product <select> options string
+const CATS = [...new Set(PRODUCTS.map(p => p.cat))];
+function productOptionsHTML() {
+  let h = '<option value="">— 선택 —</option><option value="__custom__">✏ Custom product...</option>';
+  CATS.forEach(cat => {
+    h += `<optgroup label="${cat}">`;
+    PRODUCTS.filter(p => p.cat === cat).forEach(p => {
+      h += `<option value="${p.sku}">${p.name}</option>`;
+    });
+    h += '</optgroup>';
+  });
+  return h;
+}
+
+// ── Build a single row cell group ────────────────────
+function rowCellsHTML(r, sheetId) {
+  return `
+    <td class="no">${r}</td>
+    <td class="prod-cell">
+      <select class="prod-sel" data-row="${r}" data-sheet="${sheetId}">${productOptionsHTML()}</select>
+      <div class="prod-custom-wrap" style="display:none">
+        <input type="text" class="prod-custom" data-row="${r}" data-sheet="${sheetId}" placeholder="제품명 입력">
+        <span class="back-btn" title="목록으로">↩</span>
+      </div>
+    </td>
+    <td>
+      <select class="variant-sel" data-row="${r}" data-sheet="${sheetId}">
+        <option value="">—</option>
+      </select>
+    </td>
+    <td class="qty-cell"><input type="number" class="qty-inp" data-row="${r}" data-sheet="${sheetId}" min="0" placeholder="0"></td>
+    <td class="price-cell"><input type="number" class="price-inp" data-row="${r}" data-sheet="${sheetId}" min="0" step="0.01" placeholder="0.00"></td>
+    <td class="subtotal-cell" id="${sheetId}-sub-${r}">—</td>`;
+}
+
+// ── Build table rows (pairs) ─────────────────────────
+function buildTableRows(sheetId, count) {
+  let html = '';
+  for (let r = 1; r <= count / 2; r++) {
+    const r2 = r + count / 2;
+    html += `<tr>${rowCellsHTML(r, sheetId)}<td class="divider"></td>${rowCellsHTML(r2, sheetId)}</tr>`;
+  }
+  return html;
+}
+
+// ── Build full sheet HTML ────────────────────────────
+function buildSheet(id, copyLabel) {
+  return `
+  <div class="sheet" id="${id}">
+
+    <div class="header">
+      <div>
+        <div class="logo-wrap">
+          <img src="pots-logo.png" alt="POTS." class="logo-img"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <p class="logo-text-fallback" style="display:none">POTS.</p>
+        </div>
+        <p class="brand-sub">SUNDAYPLANET47</p>
+        <p class="address">
+          408ho, 37, Seongsui-ro 22-gil, Seongdong-gu, Seoul, Republic of Korea<br>
+          Tel. +82-70-8888-2799
+        </p>
+      </div>
+      <div>
+        <p class="sheet-title">OFFER SHEET</p>
+        <p class="sheet-date" id="${id}-date"></p>
+      </div>
+    </div>
+
+    <div class="section-label">Buyer Information</div>
+    <div class="buyer-grid">
+      <div class="buyer-field">
+        <span class="field-label">Company Name</span>
+        <input type="text" class="field-input bi-company" data-sheet="${id}">
+      </div>
+      <div class="buyer-field">
+        <span class="field-label">Contact Person</span>
+        <input type="text" class="field-input bi-contact" data-sheet="${id}">
+      </div>
+      <div class="buyer-field">
+        <span class="field-label">Phone</span>
+        <input type="text" class="field-input bi-phone" data-sheet="${id}">
+      </div>
+      <div class="buyer-field">
+        <span class="field-label">Email</span>
+        <input type="text" class="field-input bi-email" data-sheet="${id}">
+      </div>
+      <div class="buyer-field full">
+        <span class="field-label">Shipping Address</span>
+        <input type="text" class="field-input bi-addr" data-sheet="${id}">
+      </div>
+    </div>
+
+    <div class="section-label">Order Details</div>
+    <div class="order-section">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:22px">No.</th>
+            <th class="left">Product Name</th>
+            <th class="left" style="width:11%">Variant</th>
+            <th style="width:38px">Qty</th>
+            <th style="width:64px">Unit Price</th>
+            <th style="width:72px">Subtotal (USD)</th>
+            <th class="divider"></th>
+            <th style="width:22px">No.</th>
+            <th class="left">Product Name</th>
+            <th class="left" style="width:11%">Variant</th>
+            <th style="width:38px">Qty</th>
+            <th style="width:64px">Unit Price</th>
+            <th style="width:72px">Subtotal (USD)</th>
+          </tr>
+        </thead>
+        <tbody id="${id}-tbody">
+          ${buildTableRows(id, 24)}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals-wrap">
+      <table class="totals-table">
+        <tr>
+          <td>Subtotal</td>
+          <td id="${id}-total-sub">$0.00</td>
+        </tr>
+        <tr>
+          <td>
+            <label class="discount-label">
+              <input type="checkbox" class="chk-first" data-sheet="${id}">
+              First Order Discount (−5%)
+            </label>
+          </td>
+          <td id="${id}-disc-first">—</td>
+        </tr>
+        <tr>
+          <td>
+            <label class="discount-label">
+              <input type="checkbox" class="chk-volume" data-sheet="${id}">
+              Volume Discount (−5%)
+            </label>
+          </td>
+          <td id="${id}-disc-vol">—</td>
+        </tr>
+        <tr class="grand">
+          <td>Total (USD)</td>
+          <td id="${id}-total-grand">$0.00</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section-label" style="margin-top:16px">Shipping &amp; Payment</div>
+    <table class="info-table">
+      <tr><td>Incoterms</td><td><span class="fixed">EXW Seoul, South Korea (Incoterms 2020)</span></td></tr>
+      <tr><td>Payment Terms</td><td><span class="fixed">100% T/T in advance before shipment</span></td></tr>
+      <tr><td>Currency</td><td><span class="fixed">USD</span></td></tr>
+      <tr>
+        <td>Bank Details</td>
+        <td>
+          <span class="fixed">Account No. 769-910009-11038</span>
+          <p class="bank-details">
+            Bank Name: KEB Hana Bank, Seoulsup<br>
+            Bank Address: 6, Achasan-ro, Seongdong-gu, Seoul, 04778, South Korea<br>
+            Swift Code: KOEXKRSE
+          </p>
+        </td>
+      </tr>
+      <tr><td>Lead Time</td><td><span class="fixed">3–7 business days (in-stock) / 3–4 weeks (made-to-order)</span></td></tr>
+      <tr><td>Requested Delivery Date</td><td><input type="text" class="editable bi-delivery" data-sheet="${id}"></td></tr>
+      <tr><td>Special Instructions</td><td><input type="text" class="editable bi-notes" data-sheet="${id}"></td></tr>
+    </table>
+
+    <div class="section-label">Terms &amp; Conditions</div>
+    <div class="terms-box">
+      <p><strong>Pricing:</strong> Wholesale prices are 50% off MSRP. Valid until Dec 31, 2026.</p>
+      <p><strong>Claims:</strong> Defective item claims accepted within 14 days of delivery with photo evidence. Resolution: replacement or credit note only. No cash refunds.</p>
+      <p><strong>Confidentiality:</strong> This document is confidential and intended for wholesale buyers only. Redistribution prohibited.</p>
+    </div>
+
+    <div class="sig-block">
+      <div class="sig-col">
+        <p class="sig-title">Seller — SUNDAYPLANET47</p>
+        <p class="sig-line">Signature / Date</p>
+      </div>
+      <div class="sig-col">
+        <p class="sig-title">Buyer</p>
+        <p class="sig-line">Signature / Date</p>
+      </div>
+    </div>
+
+    <p class="copy-badge">${copyLabel}</p>
+  </div>`;
+}
+
+document.write(buildSheet('sheet-buyer', '— Buyer Copy —'));
+document.write(buildSheet('sheet-seller', '— Seller Copy —'));
+</script>
+
+<script>
+(function () {
+
+  // ── Set date ─────────────────────────────────────────────
+  ['sheet-buyer','sheet-seller'].forEach(id => {
+    const el = document.getElementById(id + '-date');
+    if (el) {
+      const d = new Date();
+      el.textContent = 'Date: ' + d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    }
+  });
+
+  // ── Apply product data to a row ──────────────────────────
+  function applyProduct(sheetId, row, product) {
+    const sheet    = document.getElementById(sheetId);
+    const varSel   = sheet.querySelector(`.variant-sel[data-row="${row}"]`);
+    const priceInp = sheet.querySelector(`.price-inp[data-row="${row}"]`);
+
+    varSel.innerHTML = '<option value="">—</option>';
+    if (product) {
+      priceInp.value = product.price.toFixed(2);
+      if (product.variants.length > 0) {
+        product.variants.forEach(v => {
+          const opt = document.createElement('option');
+          opt.value = v; opt.textContent = v;
+          varSel.appendChild(opt);
+        });
+        varSel.disabled = false;
+      } else {
+        varSel.disabled = true;
+      }
+    } else {
+      varSel.disabled = false;
+    }
+  }
+
+  // ── Switch to custom text input ───────────────────────────
+  function switchToCustom(sheet, row) {
+    const cell = sheet.querySelector(`.prod-cell:has([data-row="${row}"])`);
+    if (!cell) return;
+    cell.querySelector('.prod-sel').style.display = 'none';
+    cell.querySelector('.prod-custom-wrap').style.display = 'flex';
+    cell.querySelector('.prod-custom').focus();
+  }
+
+  // ── Switch back to select ─────────────────────────────────
+  function switchToSelect(sheet, row) {
+    const cell = sheet.querySelector(`.prod-cell:has([data-row="${row}"])`);
+    if (!cell) return;
+    const sel = cell.querySelector('.prod-sel');
+    sel.value = '';
+    sel.style.display = '';
+    const wrap = cell.querySelector('.prod-custom-wrap');
+    wrap.style.display = 'none';
+    wrap.querySelector('.prod-custom').value = '';
+    applyProduct(sheet.id, row, null);
+    recalc(sheet.id);
+  }
+
+  // ── Get the displayed product name for a row ──────────────
+  function getProductName(sheet, row) {
+    const sel = sheet.querySelector(`.prod-sel[data-row="${row}"]`);
+    if (sel && sel.style.display !== 'none') {
+      const p = PRODUCTS.find(p => p.sku === sel.value);
+      return p ? p.name : '';
+    }
+    const custom = sheet.querySelector(`.prod-custom[data-row="${row}"]`);
+    return custom ? custom.value : '';
+  }
+
+  // ── Recalculate totals ────────────────────────────────────
+  function recalc(sheetId) {
+    let sub = 0;
+    const sheet = document.getElementById(sheetId);
+    // find all qty inputs in this sheet (covers dynamically added rows)
+    sheet.querySelectorAll('.qty-inp').forEach(qtyEl => {
+      const r      = qtyEl.dataset.row;
+      const priceEl = sheet.querySelector(`.price-inp[data-row="${r}"]`);
+      const subEl   = document.getElementById(`${sheetId}-sub-${r}`);
+      const qty     = parseFloat(qtyEl.value)    || 0;
+      const price   = parseFloat(priceEl?.value) || 0;
+      const rowSub  = qty * price;
+      if (subEl) subEl.textContent = rowSub > 0 ? formatUSD(rowSub) : '—';
+      sub += rowSub;
+    });
+
+    const chkFirst  = sheet.querySelector('.chk-first');
+    const chkVolume = sheet.querySelector('.chk-volume');
+    const discFirst = chkFirst?.checked  ? sub * 0.05 : 0;
+    const discVol   = chkVolume?.checked ? sub * 0.05 : 0;
+    const grand     = sub - discFirst - discVol;
+
+    document.getElementById(`${sheetId}-total-sub`).textContent   = formatUSD(sub);
+    document.getElementById(`${sheetId}-disc-first`).textContent  = discFirst ? '−' + formatUSD(discFirst) : '—';
+    document.getElementById(`${sheetId}-disc-vol`).textContent    = discVol   ? '−' + formatUSD(discVol)   : '—';
+    document.getElementById(`${sheetId}-total-grand`).textContent = formatUSD(grand);
+  }
+
+  // ── Sync a single row: buyer → seller ────────────────────
+  function syncRow(r) {
+    const src = document.getElementById('sheet-buyer');
+    const dst = document.getElementById('sheet-seller');
+
+    // Product — check if buyer row is in select or custom mode
+    const sSel    = src.querySelector(`.prod-sel[data-row="${r}"]`);
+    const dSel    = dst.querySelector(`.prod-sel[data-row="${r}"]`);
+    const sCustom = src.querySelector(`.prod-custom[data-row="${r}"]`);
+    const dCustom = dst.querySelector(`.prod-custom[data-row="${r}"]`);
+
+    if (sSel && sSel.style.display !== 'none') {
+      // select mode
+      if (dSel && dSel.value !== sSel.value) {
+        dSel.value = sSel.value;
+        if (sSel.value && sSel.value !== '__custom__') {
+          applyProduct('sheet-seller', r, PRODUCTS.find(p => p.sku === sSel.value));
+        }
+      }
+      // Make sure seller is also in select mode
+      if (dSel) dSel.style.display = '';
+      if (dCustom) dCustom.closest('.prod-custom-wrap').style.display = 'none';
+    } else {
+      // custom mode
+      if (dSel) dSel.style.display = 'none';
+      if (dCustom) {
+        dCustom.closest('.prod-custom-wrap').style.display = 'flex';
+        dCustom.value = sCustom ? sCustom.value : '';
+      }
+    }
+
+    // Variant
+    const sVar = src.querySelector(`.variant-sel[data-row="${r}"]`);
+    const dVar = dst.querySelector(`.variant-sel[data-row="${r}"]`);
+    if (sVar && dVar) {
+      // Rebuild seller variant options to match buyer
+      dVar.innerHTML = sVar.innerHTML;
+      dVar.value     = sVar.value;
+      dVar.disabled  = sVar.disabled;
+    }
+    // Qty
+    const sQty = src.querySelector(`.qty-inp[data-row="${r}"]`);
+    const dQty = dst.querySelector(`.qty-inp[data-row="${r}"]`);
+    if (sQty && dQty) dQty.value = sQty.value;
+    // Price
+    const sPrice = src.querySelector(`.price-inp[data-row="${r}"]`);
+    const dPrice = dst.querySelector(`.price-inp[data-row="${r}"]`);
+    if (sPrice && dPrice) dPrice.value = sPrice.value;
+  }
+
+  function syncBuyerInfo() {
+    const src = document.getElementById('sheet-buyer');
+    const dst = document.getElementById('sheet-seller');
+    ['bi-company','bi-contact','bi-phone','bi-email','bi-addr','bi-delivery','bi-notes'].forEach(cls => {
+      const s = src.querySelector('.' + cls);
+      const d = dst.querySelector('.' + cls);
+      if (s && d) d.value = s.value;
+    });
+    ['chk-first','chk-volume'].forEach(cls => {
+      const s = src.querySelector('.' + cls);
+      const d = dst.querySelector('.' + cls);
+      if (s && d) d.checked = s.checked;
+    });
+  }
+
+  function fullSync() {
+    syncBuyerInfo();
+    const src = document.getElementById('sheet-buyer');
+    src.querySelectorAll('.qty-inp').forEach(el => syncRow(el.dataset.row));
+    recalc('sheet-seller');
+  }
+
+  // ── Add Row Pair ─────────────────────────────────────────
+  window.addRowPair = function () {
+    const r1 = maxRow + 1;
+    const r2 = maxRow + 2;
+    maxRow += 2;
+
+    ['sheet-buyer','sheet-seller'].forEach(sheetId => {
+      const tbody = document.getElementById(sheetId + '-tbody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = rowCellsHTML(r1, sheetId) +
+                     '<td class="divider"></td>' +
+                     rowCellsHTML(r2, sheetId);
+      tbody.appendChild(tr);
+
+      // Stripe
+      const rows = tbody.querySelectorAll('tr');
+      rows.forEach((row, i) => {
+        row.style.background = i % 2 === 1 ? '#f9f9f9' : '';
+      });
+    });
+  };
+
+  // ── Attach events on buyer sheet ─────────────────────────
+  const buyerSheet = document.getElementById('sheet-buyer');
+
+  buyerSheet.addEventListener('change', e => {
+    const row = e.target.dataset.row;
+
+    if (e.target.classList.contains('prod-sel')) {
+      const sku = e.target.value;
+      if (sku === '__custom__') {
+        switchToCustom(buyerSheet, row);
+        switchToCustom(document.getElementById('sheet-seller'), row);
+      } else {
+        const product = PRODUCTS.find(p => p.sku === sku);
+        applyProduct('sheet-buyer', row, product);
+      }
+    }
+
+    syncBuyerInfo();
+    if (row) syncRow(row);
+    recalc('sheet-buyer');
+    recalc('sheet-seller');
+  });
+
+  buyerSheet.addEventListener('input', e => {
+    const row = e.target.dataset.row;
+    if (row) syncRow(row);
+    recalc('sheet-buyer');
+    recalc('sheet-seller');
+  });
+
+  // Back button: return from custom to select
+  buyerSheet.addEventListener('click', e => {
+    if (e.target.classList.contains('back-btn')) {
+      const wrap = e.target.closest('.prod-custom-wrap');
+      const cell = wrap.closest('td');
+      const row  = cell.querySelector('.prod-custom').dataset.row;
+      switchToSelect(buyerSheet, row);
+      syncRow(row);
+      recalc('sheet-buyer');
+      recalc('sheet-seller');
+    }
+  });
+
+  // Initial calc
+  recalc('sheet-buyer');
+  recalc('sheet-seller');
+
+  // ── Seller Copy toggle (tablet only) ─────────────────────
+  window.toggleSeller = function () {
+    const seller = document.getElementById('sheet-seller');
+    const btn    = document.getElementById('seller-toggle');
+    const isVisible = seller.classList.toggle('visible');
+    btn.textContent = isVisible ? 'Seller Copy 닫기' : 'Seller Copy 보기';
+    if (isVisible) seller.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+})();
+</script>
+
+</body>
+</html>
