@@ -1,3 +1,351 @@
+
+Claude가 응답을 완료했습니다
+선데이플래닛47 브랜드의 간단한 오더 시트를 만들거야.
+HTML로 양식을 만들어서 주문을 입력하고, 프린트까지 할 수 있었으면 좋겠어.
+"SUNDAYPLANET47
+408ho, 37, Seongsui-ro 22-gil, Seongdong-gu, Seoul, Republic of Korea
+Tel. +82-70-8888-2799"                                    
+OFFER SHEET                                    
+  BUYER INFORMATION                                    
+  Company Name                          Contact Person            
+  Phone                          Email            
+  Shipping Address                                    
+  ORDER DETAILS                                    
+No.    Product Name    Variant    Qty    Subtotal (USD)    No.    Product Name    Variant    Qty    Subtotal (USD)
+1                    13                
+2                    14                
+3                    15                
+4                    16                
+5                    17                
+6                    18                
+7                    19                
+8                    20                
+9                    21                
+10                    22                
+11                    23                
+12                    24                
+Subtotal                                    $0.00
+First Order Discount (−5%)                                    $0.00
+Volume Discount (−5%)                                    $0.00
+
+이런 내용이 들어가면 되고, 최종적으로 2매를 출력해서 사인받은다음에 바이어하나주고 우리 하나씩 갖으려고해.
+
+깃허브로 배포해서 팀원들에게 공유할거고, 제작하기 위해 나한테 필요한 내용을 확인해줘.
+
+더 보기
+4일 전
+
+사고 과정
+사고 과정
+몇 가지 확인할게요!
+
+확인했어요. 바로 만들게요!
+
+자동 계산 (First Order / Volume Discount 체크박스)
+Unit Price 포함
+로고는 나중에 교체 가능하도록 placeholder 처리
+프린트 버튼 클릭 시 BUYER COPY + SELLER COPY 2페이지 자동 출력
+
+파일 생성됨, 로드된 도구, 파일 읽음
+파일 생성됨, 로드된 도구, 파일 읽음
+완성했어요! 주요 기능 요약:
+
+바이어 시트에만 입력하면 셀러 시트에 자동으로 복사됨
+Unit Price × Qty = Subtotal 자동 계산
+First Order / Volume Discount 체크하면 −5% 자동 차감
+🖨 Print 버튼 클릭 시 BUYER COPY + SELLER COPY 2페이지 출력
+GitHub 배포 방법:
+
+새 repository 만들기 (예: sundayplanet47-order-sheet)
+offer-sheet.html 파일 업로드
+Settings → Pages → Branch: main, / (root) → Save
+https://[username].github.io/sundayplanet47-order-sheet/offer-sheet.html 로 팀원 공유
+로고 추가할 때: HTML 파일에서 logo-text 부분을 <img src="your-logo.png"> 로 교체하면 돼요.
+
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+4일 전
+SP47_Wholesale_Price_List_2026
+Drive
+
+제품 이름과 VARIANT를 목록 중에 선택할 수 있도록 하고 싶어. 제품 선택하면 옵션이 자동으로 뜨고,  UNIT PRICE 도 연동될 수 있게. 구글 스프레드 시트에 제품명/COLOR/WHOLESALE PRICE를 정리해둔게 있어 이거를 주면 만들 수 있어?
+
+4일 전
+
+사고 과정
+사고 과정
+스프레드시트 데이터 다 있어요. 바로 만들게요!
+
+
+파일 생성됨, 파일 읽음
+파일 생성됨, 파일 읽음
+업데이트했어요! 추가된 기능:
+
+Product Name — HOUSE / PLANT CARE / TOOLS / GOODS / LIFESTYLE 카테고리별 드롭다운
+Variant — 제품 선택 시 해당 컬러 옵션 자동 표시 (컬러 없는 제품은 비활성화)
+Unit Price — 제품 선택 즉시 자동 입력 (수정 불가 readonly)
+Shipping & Payment, Terms 섹션도 추가했어요 (은행 계좌 정보 포함)
+GitHub에 올릴 때 파일 하나(offer-sheet.html)만 올리면 바로 동작해요.
+
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+4일 전
+UNIT PRICE를 제품을 넣으면 자동으로 기입되는데, 수정도 할 수 있게 바꿔줘. 바이어에 따라서 추가 할인을 해줘야할 수도 있거든
+
+4일 전
+
+2개 파일 수정됨, 파일 읽음
+2개 파일 수정됨, 파일 읽음
+이제 Unit Price가 제품 선택 시 자동 입력되지만 직접 수정도 가능해요. 수정하면 바뀐 가격 기준으로 Subtotal이 바로 재계산돼요.
+
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+4일 전
+POTS 기업 로고도 추가하고 싶어
+
+3일 전
+
+사고 과정
+사고 과정
+로고 이미지 파일을 여기 채팅창에 첨부해주세요! (PNG 또는 SVG 권장) 받으면 바로 넣어드릴게요.
+
+3일 전
+업로드된 이미지
+POTS 로고.png
+3일 전
+
+명령 3개 실행함
+명령 3개 실행함
+이미지 파일이 uploads 폴더에 저장되지 않아서 직접 접근이 안 돼요. 그리고 보니 로고가 검은 배경에 흰 글자 형태인데, 흰 배경의 오더 시트에 넣으면 검은 박스가 생겨요.
+
+두 가지 방법이 있어요:
+
+옵션 1 (권장) — 배경 투명한 PNG 버전으로 다시 공유해주세요. 디자인 파일이 있으면 "배경 없이 내보내기"로 저장하면 돼요.
+
+옵션 2 — 지금 이미지 그대로 CSS filter: invert(1) 적용해서 흰 배경에 검은 로고로 반전시키는 방법. 이렇게 하려면 GitHub에 올릴 때 로고 파일(logo.png)을 offer-sheet.html과 같은 폴더에 함께 넣어주시면 돼요.
+
+어떤 방법으로 진행할까요?
+실패
+투명 배경 PNG로 다시 공유해주시거나, logo.png 파일을 offer-sheet.html과 같은 폴더에 넣고 사용하실 예정이라면 알려주세요. 그에 맞게 HTML 업데이트해드릴게요!
+
+3일 전
+업로드된 이미지
+1780659213212_image.png
+3일 전
+
+명령 2개 실행함
+명령 2개 실행함
+3일 전
+업로드된 이미지
+1780659270495_image.png
+여기
+
+3일 전
+
+명령 2개 실행함
+명령 2개 실행함
+이미지가 채팅 화면에는 보이지만 파일로는 저장이 안 됐어요. 직접 파일을 넣을 수가 없는 상황이라, 로고 파일을 offer-sheet.html과 같은 폴더에 pots-logo.png 이름으로 저장해두시면 자동으로 표시되도록 HTML을 업데이트할게요.
+
+
+2개 파일 읽음, 2개 파일 수정됨
+2개 파일 읽음, 2개 파일 수정됨
+HTML을 업데이트했어요. GitHub에 올릴 때 아래처럼 두 파일을 같은 폴더에 넣어주세요:
+
+📁 repository
+  ├── offer-sheet.html
+  └── pots-logo.png   ← 로고 파일 이름을 이렇게 저장
+로고 파일이 없을 때는 "POTS." 텍스트로 자동 대체되도록 fallback도 넣어뒀어요.
+
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+3일 전
+product name도 수정할 수 있게 해주고, 수량이 많을 경우 칸을 추가할 수 있도록 해줘. qty에 숫자표시도 되게 해줘.
+
+3시간 전
+
+파일 읽음
+파일 읽음
+전체적으로 손봐야 할 부분이 많네요. 완전히 재작성할게요.
+
+
+파일 생성됨, 파일 읽음
+파일 생성됨, 파일 읽음
+업데이트 완료! 변경된 내용:
+
+Product Name — 텍스트 필드로 변경. 타이핑하면 드롭다운 자동완성, 직접 입력도 가능. 목록에 있는 제품명 선택 시 Unit Price·Variant 자동 연동
+＋ Add Row 버튼 — 툴바에서 클릭할 때마다 행 2개씩 추가 (좌/우 각 1개). Buyer/Seller Copy 동시 추가
+Qty — 스피너 화살표 제거하고 숫자가 가운데 굵게 표시되도록 개선
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+3시간 전
+드롭다운 누르면 목록이 안보여.
+
+2시간 전
+
+사고 과정
+사고 과정
+datalist가 브라우저에 따라 동작이 달라서 생기는 문제예요. <select> 드롭다운으로 바꾸고, 직접 입력이 필요할 때 "✏ Custom..." 옵션을 선택하면 텍스트 입력창으로 전환되도록 만들게요.
+
+
+2개 파일 수정됨, 파일 읽음
+2개 파일 수정됨, 파일 읽음
+Now update the rowCellsHTML function and the product-related JS:
+
+
+파일 수정됨
+파일 수정됨
+Now update the JS logic section:
+
+
+3개 파일 수정됨, 파일 읽음
+3개 파일 수정됨, 파일 읽음
+이제 드롭다운이 제대로 동작해요:
+
+클릭하면 카테고리별 제품 목록이 바로 표시
+목록 맨 위 ✏ Custom product... 선택 시 텍스트 입력창으로 전환 (직접 입력 가능)
+↩ 버튼으로 다시 목록으로 돌아오기
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+2시간 전
+product name 중에 watering can 을 Watering Pot으로 바꿔줘
+
+2시간 전
+
+파일 수정됨, 파일 읽음
+파일 수정됨, 파일 읽음
+"Watering Can 4L" → "Watering Pot 4L"로 변경했어요.
+
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+2시간 전
+이거 아이패드에서도 잘 보일 수 있게 최적화 해줘.
+
+1시간 전
+
+2개 파일 읽음, 파일 수정됨
+2개 파일 읽음, 파일 수정됨
+Now add the toggle button to the toolbar:
+
+
+파일 수정됨
+파일 수정됨
+Now add the toggleSeller function:
+
+
+파일 수정됨, 파일 읽음
+파일 수정됨, 파일 읽음
+iPad 최적화 완료! 주요 변경사항:
+
+터치 타겟 확대 — 입력칸·드롭다운 높이 36px로 키워서 손가락으로 탭하기 편하게
+오더 테이블 가로 스크롤 — 테이블이 잘리지 않고 좌우로 스크롤 가능
+세로 모드 자동 단열 — 바이어 정보 입력칸이 1열로 자동 정렬
+Seller Copy 토글 버튼 — 태블릿에서는 Buyer Copy만 보이고, 버튼 눌러야 Seller Copy 표시 (프린트 시엔 항상 2장 출력)
+폰트·여백 — 레티나 디스플레이에 맞게 가독성 조정
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+1시간 전
+업로드된 이미지
+1780899378960_image.png
+깃허브에 올려서 팀원들과 함께 사용하고 싶어. 방법을 알려줘
+
+1시간 전
+
+사고 과정
+사고 과정
+지금 딱 맞는 화면이에요! 순서대로 알려드릴게요.
+
+1단계 — Repository 만들기 (지금 이 화면)
+
+Repository name: sp47-offer-sheet 입력
+Visibility: Public 유지 (Pages 무료 사용)
+나머지는 그대로 → Create repository 클릭
+2단계 — 파일 올리기
+
+Repository 생성 후 나오는 화면에서:
+
+"uploading an existing file" 링크 클릭
+offer-sheet.html과 pots-logo.png 두 파일을 같이 드래그 앤 드롭
+아래 Commit changes 클릭
+3단계 — GitHub Pages 활성화
+
+상단 Settings 탭 클릭
+왼쪽 메뉴 Pages 클릭
+Branch → main 선택 → /root → Save
+1~2분 기다리면 URL 생성됨
+4단계 — 팀원 공유
+
+생성된 URL:
+
+https://keuna17.github.io/sp47-offer-sheet/offer-sheet.html
+이 링크를 슬랙이나 카카오톡으로 공유하면 팀원이 브라우저에서 바로 사용 가능해요. 설치 없이, 앱 없이, 아이패드에서도 동작해요.
+
+나중에 파일 수정할 때는 GitHub에서 offer-sheet.html 파일을 클릭 → 연필(✏️) 아이콘 → 수정 → Commit하면 자동으로 업데이트돼요.
+
+1시간 전
+업로드된 이미지
+1780900169142_image.png
+이렇게 나와
+
+1시간 전
+
+사고 과정
+사고 과정
+두 가지 원인 중 하나예요.
+
+원인 1 (가장 흔함) — URL에 파일명 누락
+
+주소창에 이렇게 입력했는지 확인:
+
+https://keuna17.github.io/sp47-offer-sheet/offer-sheet.html
+/offer-sheet.html 끝에 파일명이 없으면 404가 떠요.
+
+원인 2 — Pages가 아직 활성화 안 됨
+
+GitHub repository에서:
+
+Settings → Pages 들어가서
+아래처럼 초록색으로 "Your site is live at..." 표시되는지 확인
+아직 회색이면 1~2분 더 기다렸다가 새로고침.
+
+가장 쉬운 해결법 — 파일명을 index.html로 바꾸기
+
+GitHub repository에서 offer-sheet.html 클릭 → 오른쪽 위 ✏️ 아이콘 → 파일명을 index.html로 변경 → Commit. 그러면 이후부터는:
+
+https://keuna17.github.io/sp47-offer-sheet/
+파일명 없이 짧은 URL로 접속 가능해요.
+
+1시간 전
+incoterms에 기타 조건으로 요청시에 영업일 2일 이내로 별도 회신드리겠다고 영문으로 작성해줘.
+
+PRICING에 Wholesale prices are 50% off MSRP 이 문구는 빼줘.
+
+
+2개 파일 수정됨, 파일 읽음
+2개 파일 수정됨, 파일 읽음
+두 가지 모두 수정했어요.
+
+Incoterms: EXW 기본 조건 아래에 작은 글씨로 "For other Incoterms options (e.g. FOB, CIF), please contact us. We will respond with a separate quote within 2 business days." 추가
+Pricing: "Wholesale prices are 50% off MSRP" 문구 제거, "Valid until Dec 31, 2026." 만 남김
+
+C:\Users\Lenovo\AppData\Roaming\Claude\local-agent-mode-sessions\cfe67720-030b-4559-9a75-5864f488fabc\9860bdf3-2063-4cfc-9c49-a2d5cd26a218\local_20590fc8-0255-4c1a-bf0c-e83a22276355\outputs\offer-sheet.html
+코드 
+
+
+
+
+Claude는 AI이며 실수할 수 있습니다. 응답을 다시 한번 확인해 주세요.
+
+
+raw
+Offer sheet · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +361,7 @@
       background: #f0f0f0;
       padding: 24px;
     }
-
+ 
     /* ── Toolbar ─────────────────────────────────────── */
     #toolbar {
       max-width: 960px;
@@ -42,7 +390,7 @@
     }
     #toolbar button.btn-add:hover { background: #f5f5f5; }
     #toolbar .note { font-size: 11px; color: #666; }
-
+ 
     /* ── Sheet card ──────────────────────────────────── */
     .sheet {
       max-width: 960px;
@@ -51,7 +399,7 @@
       padding: 32px 36px 28px;
       border: 1px solid #ddd;
     }
-
+ 
     /* ── Header ──────────────────────────────────────── */
     .header {
       display: flex;
@@ -96,7 +444,7 @@
       white-space: nowrap;
     }
     .sheet-date { text-align: right; font-size: 10px; color: #666; margin-top: 4px; }
-
+ 
     /* ── Section label ───────────────────────────────── */
     .section-label {
       font-size: 9px;
@@ -109,7 +457,7 @@
       margin-bottom: 8px;
       display: inline-block;
     }
-
+ 
     /* ── Buyer info ──────────────────────────────────── */
     .buyer-grid {
       display: grid;
@@ -131,7 +479,7 @@
       font-family: inherit;
     }
     .field-input:focus { border-bottom-color: #111; }
-
+ 
     /* ── Order table ─────────────────────────────────── */
     .order-section { margin-bottom: 12px; }
     table { width: 100%; border-collapse: collapse; }
@@ -160,7 +508,7 @@
       font-weight: 600;
     }
     td.divider, th.divider { width: 2px; padding: 0; background: #bbb; }
-
+ 
     /* custom product input wrapper */
     .prod-custom-wrap {
       display: flex;
@@ -177,7 +525,7 @@
       line-height: 1;
     }
     .back-btn:hover { color: #111; }
-
+ 
     /* inputs inside table */
     td input[type="text"],
     td input[type="number"] {
@@ -210,7 +558,7 @@
       white-space: nowrap;
       color: #111;
     }
-
+ 
     /* variant select inside table */
     td select {
       border: none;
@@ -225,7 +573,7 @@
     }
     td select:focus { background: #fffbe6; }
     optgroup { font-weight: 700; }
-
+ 
     /* ── Totals ──────────────────────────────────────── */
     .totals-wrap { display: flex; justify-content: flex-end; margin-top: 6px; }
     .totals-table { width: 300px; }
@@ -245,7 +593,7 @@
     }
     .discount-label { display: flex; align-items: center; gap: 6px; }
     .discount-label input[type="checkbox"] { cursor: pointer; accent-color: #111; }
-
+ 
     /* ── Shipping & Payment ──────────────────────────── */
     .info-table { width: 100%; margin-bottom: 14px; }
     .info-table td {
@@ -277,7 +625,7 @@
     .info-table .editable:focus { border-bottom-color: #111; }
     .info-table .fixed { color: #333; font-size: 10px; line-height: 1.5; }
     .bank-details { font-size: 9.5px; color: #555; line-height: 1.6; margin-top: 2px; }
-
+ 
     /* ── Terms ───────────────────────────────────────── */
     .terms-box {
       border: 1px solid #e0e0e0;
@@ -287,22 +635,22 @@
     }
     .terms-box p { font-size: 9px; color: #666; line-height: 1.6; margin-bottom: 3px; }
     .terms-box p strong { color: #333; }
-
+ 
     /* ── Signatures ──────────────────────────────────── */
     .sig-block { display: flex; justify-content: space-between; margin-top: 20px; gap: 32px; }
     .sig-col { flex: 1; border-top: 1px solid #111; padding-top: 6px; }
     .sig-col .sig-title { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #555; }
     .sig-col .sig-line { margin-top: 30px; border-top: 1px solid #aaa; font-size: 9px; color: #aaa; padding-top: 3px; text-align: center; }
-
+ 
     /* ── Copy badge ──────────────────────────────────── */
     .copy-badge { text-align: center; font-size: 9px; font-weight: 700; letter-spacing: .16em; color: #999; margin-top: 14px; text-transform: uppercase; }
-
+ 
     /* ── iPad / Tablet ───────────────────────────────── */
     @media screen and (max-width: 1024px) {
       body { padding: 14px; font-size: 12px; }
-
+ 
       .sheet { padding: 24px 18px 20px; }
-
+ 
       /* Bigger touch targets for all table inputs & selects */
       td select,
       td input[type="text"],
@@ -311,7 +659,7 @@
         padding: 6px 4px;
         min-height: 36px;
       }
-
+ 
       /* Horizontally scrollable order table */
       .order-section {
         overflow-x: auto;
@@ -320,45 +668,45 @@
         border-radius: 4px;
       }
       table { min-width: 820px; }
-
+ 
       /* Larger header buttons */
       #toolbar button {
         padding: 11px 22px;
         font-size: 14px;
       }
       #toolbar .note { font-size: 12px; }
-
+ 
       /* Logo */
       .logo-img { height: 40px; }
-
+ 
       /* Buyer info: stack to single column on portrait */
       .buyer-grid { gap: 10px 20px; }
       .field-input { font-size: 14px; padding: 5px 0; }
       .field-label { font-size: 10px; }
-
+ 
       /* Shipping table */
       .info-table td { font-size: 12px; padding: 6px 8px; }
       .info-table td:first-child { font-size: 10px; width: 160px; }
       .info-table .editable { font-size: 13px; }
-
+ 
       /* Totals */
       .totals-table { width: 100%; max-width: 360px; }
       .totals-table td { font-size: 13px; padding: 6px 8px; }
-
+ 
       /* Signature lines: taller for writing room */
       .sig-col .sig-line { margin-top: 40px; }
-
+ 
       /* Section labels */
       .section-label { font-size: 10px; padding: 4px 10px; }
-
+ 
       /* Terms */
       .terms-box p { font-size: 10px; }
-
+ 
       /* Seller copy: collapsible on screen */
       #sheet-seller { display: none; }
       #sheet-seller.visible { display: block; }
     }
-
+ 
     /* Portrait iPad (768px): single-column buyer info */
     @media screen and (max-width: 820px) {
       .buyer-grid { grid-template-columns: 1fr; }
@@ -366,7 +714,7 @@
       .header { flex-direction: column; gap: 8px; }
       .sheet-title { text-align: left; font-size: 18px; }
     }
-
+ 
     /* Toggle seller copy button */
     #seller-toggle {
       padding: 11px 22px;
@@ -383,7 +731,7 @@
     @media screen and (max-width: 1024px) {
       #seller-toggle { display: inline-block; }
     }
-
+ 
     /* ── Print ───────────────────────────────────────── */
     @media print {
       body { background: #fff; padding: 0; font-size: 9.5px; }
@@ -402,14 +750,14 @@
   </style>
 </head>
 <body>
-
+ 
 <div id="toolbar">
   <button onclick="window.print()">🖨 Print 2 copies</button>
   <button class="btn-add" onclick="addRowPair()">＋ Add Row</button>
   <button id="seller-toggle" onclick="toggleSeller()">Seller Copy 보기</button>
   <span class="note">입력은 위쪽(Buyer Copy)에만 — Seller Copy에 자동 복사됩니다.</span>
 </div>
-
+ 
 <script>
 // ════════════════════════════════════════════════════
 //  PRODUCT DATABASE
@@ -450,17 +798,17 @@ const PRODUCTS = [
   { sku:"PB-L",   name:"Plant Bag Large",              cat:"LIFESTYLE",  price:19.88, variants:["BLACK","BEIGE","NAVY","IVORY","KHAKI","YELLOW","PURPLE"] },
   { sku:"GC-GR",  name:"Green Ball Cap",               cat:"LIFESTYLE",  price:10.60, variants:["ONE COLOR"] },
 ];
-
+ 
 let maxRow = 24;
-
+ 
 function formatUSD(n) {
   return '$' + Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
-
+ 
 function findProductByName(name) {
   return PRODUCTS.find(p => p.name.toLowerCase() === (name||'').trim().toLowerCase());
 }
-
+ 
 // Build product <select> options string
 const CATS = [...new Set(PRODUCTS.map(p => p.cat))];
 function productOptionsHTML() {
@@ -474,7 +822,7 @@ function productOptionsHTML() {
   });
   return h;
 }
-
+ 
 // ── Build a single row cell group ────────────────────
 function rowCellsHTML(r, sheetId) {
   return `
@@ -495,7 +843,7 @@ function rowCellsHTML(r, sheetId) {
     <td class="price-cell"><input type="number" class="price-inp" data-row="${r}" data-sheet="${sheetId}" min="0" step="0.01" placeholder="0.00"></td>
     <td class="subtotal-cell" id="${sheetId}-sub-${r}">—</td>`;
 }
-
+ 
 // ── Build table rows (pairs) ─────────────────────────
 function buildTableRows(sheetId, count) {
   let html = '';
@@ -505,12 +853,12 @@ function buildTableRows(sheetId, count) {
   }
   return html;
 }
-
+ 
 // ── Build full sheet HTML ────────────────────────────
 function buildSheet(id, copyLabel) {
   return `
   <div class="sheet" id="${id}">
-
+ 
     <div class="header">
       <div>
         <div class="logo-wrap">
@@ -529,7 +877,7 @@ function buildSheet(id, copyLabel) {
         <p class="sheet-date" id="${id}-date"></p>
       </div>
     </div>
-
+ 
     <div class="section-label">Buyer Information</div>
     <div class="buyer-grid">
       <div class="buyer-field">
@@ -553,7 +901,7 @@ function buildSheet(id, copyLabel) {
         <input type="text" class="field-input bi-addr" data-sheet="${id}">
       </div>
     </div>
-
+ 
     <div class="section-label">Order Details</div>
     <div class="order-section">
       <table>
@@ -579,7 +927,7 @@ function buildSheet(id, copyLabel) {
         </tbody>
       </table>
     </div>
-
+ 
     <div class="totals-wrap">
       <table class="totals-table">
         <tr>
@@ -610,10 +958,10 @@ function buildSheet(id, copyLabel) {
         </tr>
       </table>
     </div>
-
+ 
     <div class="section-label" style="margin-top:16px">Shipping &amp; Payment</div>
     <table class="info-table">
-      <tr><td>Incoterms</td><td><span class="fixed">EXW Seoul, South Korea (Incoterms 2020)</span></td></tr>
+      <tr><td>Incoterms</td><td><span class="fixed">EXW Seoul, South Korea (Incoterms 2020)<br><span style="color:#888;font-size:9px">For other Incoterms options (e.g. FOB, CIF), please contact us. We will respond with a separate quote within 2 business days.</span></span></td></tr>
       <tr><td>Payment Terms</td><td><span class="fixed">100% T/T in advance before shipment</span></td></tr>
       <tr><td>Currency</td><td><span class="fixed">USD</span></td></tr>
       <tr>
@@ -631,14 +979,14 @@ function buildSheet(id, copyLabel) {
       <tr><td>Requested Delivery Date</td><td><input type="text" class="editable bi-delivery" data-sheet="${id}"></td></tr>
       <tr><td>Special Instructions</td><td><input type="text" class="editable bi-notes" data-sheet="${id}"></td></tr>
     </table>
-
+ 
     <div class="section-label">Terms &amp; Conditions</div>
     <div class="terms-box">
-      <p><strong>Pricing:</strong> Wholesale prices are 50% off MSRP. Valid until Dec 31, 2026.</p>
+      <p><strong>Pricing:</strong> Valid until Dec 31, 2026.</p>
       <p><strong>Claims:</strong> Defective item claims accepted within 14 days of delivery with photo evidence. Resolution: replacement or credit note only. No cash refunds.</p>
       <p><strong>Confidentiality:</strong> This document is confidential and intended for wholesale buyers only. Redistribution prohibited.</p>
     </div>
-
+ 
     <div class="sig-block">
       <div class="sig-col">
         <p class="sig-title">Seller — SUNDAYPLANET47</p>
@@ -649,18 +997,18 @@ function buildSheet(id, copyLabel) {
         <p class="sig-line">Signature / Date</p>
       </div>
     </div>
-
+ 
     <p class="copy-badge">${copyLabel}</p>
   </div>`;
 }
-
+ 
 document.write(buildSheet('sheet-buyer', '— Buyer Copy —'));
 document.write(buildSheet('sheet-seller', '— Seller Copy —'));
 </script>
-
+ 
 <script>
 (function () {
-
+ 
   // ── Set date ─────────────────────────────────────────────
   ['sheet-buyer','sheet-seller'].forEach(id => {
     const el = document.getElementById(id + '-date');
@@ -669,13 +1017,13 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
       el.textContent = 'Date: ' + d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
     }
   });
-
+ 
   // ── Apply product data to a row ──────────────────────────
   function applyProduct(sheetId, row, product) {
     const sheet    = document.getElementById(sheetId);
     const varSel   = sheet.querySelector(`.variant-sel[data-row="${row}"]`);
     const priceInp = sheet.querySelector(`.price-inp[data-row="${row}"]`);
-
+ 
     varSel.innerHTML = '<option value="">—</option>';
     if (product) {
       priceInp.value = product.price.toFixed(2);
@@ -693,7 +1041,7 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
       varSel.disabled = false;
     }
   }
-
+ 
   // ── Switch to custom text input ───────────────────────────
   function switchToCustom(sheet, row) {
     const cell = sheet.querySelector(`.prod-cell:has([data-row="${row}"])`);
@@ -702,7 +1050,7 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
     cell.querySelector('.prod-custom-wrap').style.display = 'flex';
     cell.querySelector('.prod-custom').focus();
   }
-
+ 
   // ── Switch back to select ─────────────────────────────────
   function switchToSelect(sheet, row) {
     const cell = sheet.querySelector(`.prod-cell:has([data-row="${row}"])`);
@@ -716,7 +1064,7 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
     applyProduct(sheet.id, row, null);
     recalc(sheet.id);
   }
-
+ 
   // ── Get the displayed product name for a row ──────────────
   function getProductName(sheet, row) {
     const sel = sheet.querySelector(`.prod-sel[data-row="${row}"]`);
@@ -727,7 +1075,7 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
     const custom = sheet.querySelector(`.prod-custom[data-row="${row}"]`);
     return custom ? custom.value : '';
   }
-
+ 
   // ── Recalculate totals ────────────────────────────────────
   function recalc(sheetId) {
     let sub = 0;
@@ -743,30 +1091,30 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
       if (subEl) subEl.textContent = rowSub > 0 ? formatUSD(rowSub) : '—';
       sub += rowSub;
     });
-
+ 
     const chkFirst  = sheet.querySelector('.chk-first');
     const chkVolume = sheet.querySelector('.chk-volume');
     const discFirst = chkFirst?.checked  ? sub * 0.05 : 0;
     const discVol   = chkVolume?.checked ? sub * 0.05 : 0;
     const grand     = sub - discFirst - discVol;
-
+ 
     document.getElementById(`${sheetId}-total-sub`).textContent   = formatUSD(sub);
     document.getElementById(`${sheetId}-disc-first`).textContent  = discFirst ? '−' + formatUSD(discFirst) : '—';
     document.getElementById(`${sheetId}-disc-vol`).textContent    = discVol   ? '−' + formatUSD(discVol)   : '—';
     document.getElementById(`${sheetId}-total-grand`).textContent = formatUSD(grand);
   }
-
+ 
   // ── Sync a single row: buyer → seller ────────────────────
   function syncRow(r) {
     const src = document.getElementById('sheet-buyer');
     const dst = document.getElementById('sheet-seller');
-
+ 
     // Product — check if buyer row is in select or custom mode
     const sSel    = src.querySelector(`.prod-sel[data-row="${r}"]`);
     const dSel    = dst.querySelector(`.prod-sel[data-row="${r}"]`);
     const sCustom = src.querySelector(`.prod-custom[data-row="${r}"]`);
     const dCustom = dst.querySelector(`.prod-custom[data-row="${r}"]`);
-
+ 
     if (sSel && sSel.style.display !== 'none') {
       // select mode
       if (dSel && dSel.value !== sSel.value) {
@@ -786,7 +1134,7 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
         dCustom.value = sCustom ? sCustom.value : '';
       }
     }
-
+ 
     // Variant
     const sVar = src.querySelector(`.variant-sel[data-row="${r}"]`);
     const dVar = dst.querySelector(`.variant-sel[data-row="${r}"]`);
@@ -805,7 +1153,7 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
     const dPrice = dst.querySelector(`.price-inp[data-row="${r}"]`);
     if (sPrice && dPrice) dPrice.value = sPrice.value;
   }
-
+ 
   function syncBuyerInfo() {
     const src = document.getElementById('sheet-buyer');
     const dst = document.getElementById('sheet-seller');
@@ -820,20 +1168,20 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
       if (s && d) d.checked = s.checked;
     });
   }
-
+ 
   function fullSync() {
     syncBuyerInfo();
     const src = document.getElementById('sheet-buyer');
     src.querySelectorAll('.qty-inp').forEach(el => syncRow(el.dataset.row));
     recalc('sheet-seller');
   }
-
+ 
   // ── Add Row Pair ─────────────────────────────────────────
   window.addRowPair = function () {
     const r1 = maxRow + 1;
     const r2 = maxRow + 2;
     maxRow += 2;
-
+ 
     ['sheet-buyer','sheet-seller'].forEach(sheetId => {
       const tbody = document.getElementById(sheetId + '-tbody');
       const tr = document.createElement('tr');
@@ -841,7 +1189,7 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
                      '<td class="divider"></td>' +
                      rowCellsHTML(r2, sheetId);
       tbody.appendChild(tr);
-
+ 
       // Stripe
       const rows = tbody.querySelectorAll('tr');
       rows.forEach((row, i) => {
@@ -849,13 +1197,13 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
       });
     });
   };
-
+ 
   // ── Attach events on buyer sheet ─────────────────────────
   const buyerSheet = document.getElementById('sheet-buyer');
-
+ 
   buyerSheet.addEventListener('change', e => {
     const row = e.target.dataset.row;
-
+ 
     if (e.target.classList.contains('prod-sel')) {
       const sku = e.target.value;
       if (sku === '__custom__') {
@@ -866,20 +1214,20 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
         applyProduct('sheet-buyer', row, product);
       }
     }
-
+ 
     syncBuyerInfo();
     if (row) syncRow(row);
     recalc('sheet-buyer');
     recalc('sheet-seller');
   });
-
+ 
   buyerSheet.addEventListener('input', e => {
     const row = e.target.dataset.row;
     if (row) syncRow(row);
     recalc('sheet-buyer');
     recalc('sheet-seller');
   });
-
+ 
   // Back button: return from custom to select
   buyerSheet.addEventListener('click', e => {
     if (e.target.classList.contains('back-btn')) {
@@ -892,11 +1240,11 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
       recalc('sheet-seller');
     }
   });
-
+ 
   // Initial calc
   recalc('sheet-buyer');
   recalc('sheet-seller');
-
+ 
   // ── Seller Copy toggle (tablet only) ─────────────────────
   window.toggleSeller = function () {
     const seller = document.getElementById('sheet-seller');
@@ -907,6 +1255,9 @@ document.write(buildSheet('sheet-seller', '— Seller Copy —'));
   };
 })();
 </script>
-
+ 
 </body>
 </html>
+ 
+
+
