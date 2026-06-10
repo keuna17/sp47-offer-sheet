@@ -397,7 +397,7 @@
         margin: 0;
         page-break-after: always;
       }
-      .sheet:last-of-type { page-break-after: auto; }
+      .sheet { page-break-after: auto; }
 
       * { color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .section-label { background: #000 !important; color: #fff !important; }
@@ -419,8 +419,7 @@
 <div id="toolbar">
   <button onclick="window.print()">🖨 Print 2 copies</button>
   <button class="btn-add" onclick="addRowPair()">＋ Add Row</button>
-  <button id="seller-toggle" onclick="toggleSeller()">Seller Copy 보기</button>
-  <span class="note">입력은 위쪽(Buyer Copy)에만 — Seller Copy에 자동 복사됩니다.</span>
+  <span class="note">내용을 입력하고 프린트 버튼을 눌러주세요.</span>
 </div>
 
 <script>
@@ -646,7 +645,6 @@ function buildSheet(id, copyLabel) {
 }
 
 document.write(buildSheet('sheet-buyer', ''));
-document.write(buildSheet('sheet-seller', ''));
 </script>
 
 <script>
