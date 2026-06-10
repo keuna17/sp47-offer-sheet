@@ -192,10 +192,7 @@
     }
     td input[type="number"] {
       text-align: right;
-      -moz-appearance: textfield;
     }
-    td input[type="number"]::-webkit-inner-spin-button,
-    td input[type="number"]::-webkit-outer-spin-button { display: none; }
     td input[type="text"]:focus,
     td input[type="number"]:focus { background: #fffbe6; }
     td.qty-cell { width: 38px; }
@@ -809,19 +806,17 @@ document.write(buildSheet('sheet-buyer', ''));
     const r2 = maxRow + 2;
     maxRow += 2;
 
-    ['sheet-buyer','sheet-seller'].forEach(sheetId => {
-      const tbody = document.getElementById(sheetId + '-tbody');
-      const tr = document.createElement('tr');
-      tr.innerHTML = rowCellsHTML(r1, sheetId) +
-                     '<td class="divider"></td>' +
-                     rowCellsHTML(r2, sheetId);
-      tbody.appendChild(tr);
+    const tbody = document.getElementById('sheet-buyer-tbody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = rowCellsHTML(r1, 'sheet-buyer') +
+                   '<td class="divider"></td>' +
+                   rowCellsHTML(r2, 'sheet-buyer');
+    tbody.appendChild(tr);
 
-      // Stripe
-      const rows = tbody.querySelectorAll('tr');
-      rows.forEach((row, i) => {
-        row.style.background = i % 2 === 1 ? '#f9f9f9' : '';
-      });
+    // Stripe
+    const rows = tbody.querySelectorAll('tr');
+    rows.forEach((row, i) => {
+      row.style.background = i % 2 === 1 ? '#f9f9f9' : '';
     });
   };
 
@@ -835,24 +830,18 @@ document.write(buildSheet('sheet-buyer', ''));
       const sku = e.target.value;
       if (sku === '__custom__') {
         switchToCustom(buyerSheet, row);
-        switchToCustom(document.getElementById('sheet-seller'), row);
       } else {
         const product = PRODUCTS.find(p => p.sku === sku);
         applyProduct('sheet-buyer', row, product);
       }
     }
 
-    syncBuyerInfo();
-    if (row) syncRow(row);
-    recalc('sheet-buyer');
-    recalc('sheet-seller');
+    if (row) recalc('sheet-buyer');
   });
 
   buyerSheet.addEventListener('input', e => {
     const row = e.target.dataset.row;
-    if (row) syncRow(row);
-    recalc('sheet-buyer');
-    recalc('sheet-seller');
+    if (row) recalc('sheet-buyer');
   });
 
   // Back button: return from custom to select
@@ -862,15 +851,12 @@ document.write(buildSheet('sheet-buyer', ''));
       const cell = wrap.closest('td');
       const row  = cell.querySelector('.prod-custom').dataset.row;
       switchToSelect(buyerSheet, row);
-      syncRow(row);
       recalc('sheet-buyer');
-      recalc('sheet-seller');
     }
   });
 
   // Initial calc
   recalc('sheet-buyer');
-  recalc('sheet-seller');
 
   // ── Seller Copy toggle (tablet only) ─────────────────────
   window.toggleSeller = function () {
